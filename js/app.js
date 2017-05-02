@@ -21,8 +21,13 @@ let isEnd = true
 loadDataToApp()
 
 function assignEventListener (button, callback) {
-  button.addEventListener('click', callback)
-  button.addEventListener('touchstart', callback, false)
+
+  if (/Android|webOS|iPhone|iPad|BlackBerry|Windows Phone|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent)) {
+    button.addEventListener('touchstart', callback, false)
+  } else {
+    button.addEventListener('click', callback)
+  }
+
 }
 
 function loadDataToApp () {
