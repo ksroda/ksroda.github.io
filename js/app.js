@@ -95,13 +95,13 @@ function moveView (maxIndex) {
 }
 
 function renderQuestion (root, { id, question, answers }, index, maxIndex) {
-  let container = document.createElement('div')
-  let questionDiv = document.createElement('div')
-  let text = document.createElement('span')
-  let answersDiv = document.createElement('div')
-  let navigation = document.createElement('nav')
-  let prevButton = document.createElement('button')
-  let nextButton = document.createElement('button')
+  const container = document.createElement('div')
+  const questionDiv = document.createElement('div')
+  const text = document.createElement('span')
+  const answersDiv = document.createElement('div')
+  const navigation = document.createElement('nav')
+  const prevButton = document.createElement('button')
+  const nextButton = document.createElement('button')
 
   let questionNumber = document.createElement('span')
   questionNumber.textContent = id
@@ -145,12 +145,12 @@ function renderQuestion (root, { id, question, answers }, index, maxIndex) {
 }
 
 function renderAnswer (_id, { id, answer }) {
-  let div = document.createElement('div')
-  let divLabel = document.createElement('div')
-  let divRadio = document.createElement('div')
-  let input = document.createElement('input')
-  let label = document.createElement('label')
-  let ghostLabel = document.createElement('label')
+  const div = document.createElement('div')
+  const divLabel = document.createElement('div')
+  const divRadio = document.createElement('div')
+  const input = document.createElement('input')
+  const label = document.createElement('label')
+  const ghostLabel = document.createElement('label')
 
   input.type = 'radio'
   input.className = 'sg-radio__element'
@@ -218,11 +218,18 @@ function resetQuiz (maxIndex) {
   userAnswers = {}
   timeUsed = 0
   isEnd = false
-  Array.from(document.getElementsByTagName('input')).map(input => input.disabled = false)
-  Array.from(document.getElementsByTagName('input')).map(input => input.checked = false)
+
+  Array.from(document.getElementsByTagName('input')).forEach(input => {
+    input.disabled = false
+    input.checked = false
+  })
   Array.from(document.getElementsByTagName('label'))
-    .map(child => child.style.color === mintPrimary ? child.style.color = white : null)
-  Array.from(questionsListing.childNodes).map(answerNum => answerNum.style.backgroundColor = graySecondary)
+    .forEach(child => {
+      if (child.style.color === mintPrimary) {
+        child.style.color = white
+      }
+    })
+  Array.from(questionsListing.childNodes).forEach(answerNum => {answerNum.style.backgroundColor = graySecondary})
 }
 
 function stopQuiz (lastIndex) {
@@ -241,13 +248,13 @@ function handleAnswerClicked (questionId, value) {
 
 function checkScore (lastIndex) {
   let result = Object.keys(userAnswers).reduce((acc, key, index) => (
-    userAnswers[key] === correctAnswers[key] ? acc += 1 : acc
+    userAnswers[key] === correctAnswers[key] ? acc + 1 : acc
   ),0)
 
   const resultSpan = document.getElementById('result-span')
   resultSpan.innerHTML = `${result} / ${lastIndex}`
 
-  Array.from(questionsListing.childNodes).map((questionNum, index) => {
+  Array.from(questionsListing.childNodes).forEach((questionNum, index) => {
     questionNum.style.backgroundColor =
       (
         userAnswers[parseInt(questionNum.textContent)] === correctAnswers[parseInt(questionNum.textContent)]
@@ -256,9 +263,9 @@ function checkScore (lastIndex) {
       )
   })
 
-  Array.from(document.getElementsByTagName('input')).map(input => input.disabled = true)
+  Array.from(document.getElementsByTagName('input')).forEach(input => {input.disabled = true})
 
-  Array.from(document.getElementsByClassName('question-div')).map((child, index) => {
+  Array.from(document.getElementsByClassName('question-div')).forEach((child, index) => {
     Array.from(child.getElementsByClassName('sg-label__text'))[correctAnswers[index+1]-1].style.color = mintPrimary
   })
 }
