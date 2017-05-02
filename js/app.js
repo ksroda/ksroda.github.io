@@ -237,7 +237,6 @@ function stopQuiz (lastIndex) {
 
 function handleAnswerClicked (questionId, value) {
   userAnswers[questionId] = parseInt(value)
-  console.log(questionId + 1, Object.keys(correctAnswers).length)
   if (questionId + 1 <= Object.keys(correctAnswers).length) {
     currentQuestion = currentQuestion + 1
     moveView(Object.keys(correctAnswers).length)
