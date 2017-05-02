@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz app</title>
+  <link rel="stylesheet" href="css/app.css">
+  <link href="https://styleguide.brainly.com/77.2.0/style-guide.css" rel="stylesheet"/>
+</head>
+<body>
+  <div id="questions-container" class="questions-container">
+
+    <div id="start">
+      <span class="start__span">Rozpocznij quiz</span>
+      <button class="sg-button-primary sg-button-primary--alt" id="start__button">
+        Start
+      </button>
+    </div>
+
+  </div>
+
+  <button class="sg-button-primary sg-button-primary--alt" id="stop__button" class="stop__button">
+    Zakończ
+  </button>
+  <div class="questions-listing-container">
+    <div id="questions-listing-container__div" class="questions-listing-container__div"></div>
+  </div>
+
+  <div id="timer" class="timer"></div>
+  <button class="sg-button-primary sg-button-primary--alt" class="to-results__button" id="to-results__button">Wyniki</button>
+
+  <script src="js/app.js"></script>
+</body>
+
+</html>
